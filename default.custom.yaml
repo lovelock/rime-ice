@@ -1,0 +1,6 @@
+patch:
+  # 方案列表
+  schema_list:
+    - schema: flypy_flow
+    - schema: double_pinyin_flypy
+    - schema: rime_ice
