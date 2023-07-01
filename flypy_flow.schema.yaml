@@ -223,7 +223,7 @@ speller:
   alphabet: "zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA`"
   delimiter: " '"
   algebra:
-    - derive/^(.*)$/~$1/  # 把*.dict.yaml词库里面的(全拼)编码备份一份，开头添加“~”标识
+    #- derive/^(.*)$/~$1/  # 把*.dict.yaml词库里面的(全拼)编码备份一份，开头添加“~”标识
     - xform/^sh(\w+)$/U$1/
     - xform/^ch(\w+)/I$1/
     - xform/^zh(\w+)/V$1/
@@ -264,5 +264,5 @@ speller:
     - derive/^(\w+);(\w)(\w)$/$1``/    # Flypy: AB``
     - derive/^(\w+);(\w)(\w)$/$1$2/    # Flypy: ABC
     - xform/^(\w+);(\w)(\w)$/$1/       # Flypy: AB
-    - xform/^~//                   # 把“~”开头的原始(全拼)编码还原回来
+    #- xform/^~//                   # 把“~”开头的原始(全拼)编码还原回来
     #- abbrev/^(.).+$/$1/
