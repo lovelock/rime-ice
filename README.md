@@ -32,6 +32,7 @@
     -   [长词优先](https://github.com/tumuyan/rime-melt/blob/master/lua/melt.lua)
     -   [Unicode](https://github.com/shewer/librime-lua-script/blob/main/lua/component/unicode.lua)
     -   [数字、人民币大写](https://wb98.gitee.io/)
+    -   常见错音错字提示
     -   所有标点符号直接上屏，/ 模式改为 v 模式，/ 直接上屏
     -   增加了许多拼音纠错
 - 简体字表、词库
@@ -68,13 +69,15 @@
 
 ## 使用说明
 
+⚠️ 单独使用词库注意事项：`rime_ice.dict.yaml` 下面包含了大写字母，这和配置有些许绑定，可以直接删除，详细说明：[#356](https://github.com/iDvel/rime-ice/issues/356)
+
 建议备份原先配置，清空配置目录。
 
-⚠️ 单独使用词库注意事项，`rime_ice.dict.yaml` 下面包含了大写字母，这和配置有些许绑定，可以直接删除，详细说明：[#356](https://github.com/iDvel/rime-ice/issues/356)
+配置目录为小狼毫的 `%APPDATA%\Rime`，鼠须管的 `~/Library/Rime`，可通过右键菜单栏图标打开。
 
 ### 手动安装
 
-将仓库所有文件复制粘贴进去就好了。
+将仓库所有文件复制粘贴到配置目录，重新部署。
 
 更新词库，手动覆盖 `cn_dicts` `en_dcits` `opencc` 三个文件夹。
 
@@ -171,7 +174,11 @@ patch:
 
 搜狗转 Rime：[lewangdev/scel2txt](https://github.com/lewangdev/scel2txt)
 
-大量参考[校对标准论坛](http://www.jiaodui.com/bbs/)。
+大量参考：
+
+- [校对标准论坛](http://www.jiaodui.com/bbs/)
+- [汉典](https://www.zdic.net/)
+- [成语典](https://dict.idioms.moe.edu.tw/)
 
 Thanks to JetBrains for the OSS development license.
 

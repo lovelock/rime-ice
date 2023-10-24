@@ -260,6 +260,60 @@ var doublePinyinMSPY = schema{
 	},
 }
 
+var doublePinyinSogou = schema{
+	name: "cn_en_double_pinyin_sogou",
+	desc: "搜狗双拼",
+	path: filepath.Join(RimeDir, "en_dicts/cn_en_double_pinyin_sogou.dict.yaml"),
+	mapping: map[string]string{
+		// 零声母
+		"-a-":   "oa",
+		"-e-":   "oe",
+		"-o-":   "oo",
+		"-ai-":  "ol",
+		"-ei-":  "oz",
+		"-ou-":  "ob",
+		"-an-":  "oj",
+		"-en-":  "of",
+		"-ang-": "oh",
+		"-eng-": "og",
+		"-ao-":  "ok",
+		"-er-":  "or",
+		// zh ch sh
+		"zh": "v",
+		"ch": "i",
+		"sh": "u",
+		// 韵母
+		"iu":   "q",
+		"ia":   "w",
+		"ua":   "w",
+		"er":   "r",
+		"uan":  "r",
+		"ue":   "t",
+		"uai":  "y",
+		"uo":   "o",
+		"un":   "p",
+		"iong": "s",
+		"ong":  "s",
+		"iang": "d",
+		"uang": "d",
+		"en":   "f",
+		"eng":  "g",
+		"ang":  "h",
+		"an":   "j",
+		"ao":   "k",
+		"ai":   "l",
+		"ing":  ";",
+		"ei":   "z",
+		"ie":   "x",
+		"iao":  "c",
+		"ui":   "v",
+		"ve":   "t",
+		"ou":   "b",
+		"in":   "n",
+		"ian":  "m",
+	},
+}
+
 var doublePinyinZiGuang = schema{
 	name: "cn_en_double_pinyin_ziguang",
 	desc: "紫光双拼",
@@ -382,6 +436,7 @@ func CnEn() {
 		doublePinyin,
 		doublePinyinFlypy,
 		doublePinyinMSPY,
+		doublePinyinSogou,
 		doublePinyinZiGuang,
 		doublePinyinABC,
 	}
@@ -434,7 +489,7 @@ func writePrefix(s schema) {
 # https://github.com/iDvel/rime-ice
 # ------- 中英混输词库 for %s -------
 # 由 others/cn_en.txt 自动生成
-# 编码前的 ⓘ 符号是为了防止英文方案拼写派生时派生出全大写字母
+# 编码前的 ⓘ 符号是为了防止英文方案拼写派生时派生出全大写字母（在 melt_eng.schema.yaml 中实现）
 # 示例：输入 txu 得到 T恤；输入 Txu 得到 T恤； 输入 TXU 则只会得到 TXU
 ---
 name: %s

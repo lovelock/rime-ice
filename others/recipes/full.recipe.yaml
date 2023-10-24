@@ -17,9 +17,11 @@ install_files: >-
   weasel_style.yaml
   rime_ice.schema.yaml
   rime_ice.dict.yaml
+  t9.schema.yaml
   double_pinyin.schema.yaml
   double_pinyin_abc.schema.yaml
   double_pinyin_mspy.schema.yaml
+  double_pinyin_sogou.schema.yaml
   double_pinyin_flypy.schema.yaml
   double_pinyin_ziguang.schema.yaml
   symbols_v.yaml
@@ -29,4 +31,3 @@ install_files: >-
   melt_eng.schema.yaml
   melt_eng.dict.yaml
   custom_phrase.txt
-  zh-hans-t-essay-bgw.gram

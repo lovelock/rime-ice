@@ -33,7 +33,7 @@ schema:
 # reset: 默认状态。 注释掉后，切换窗口时不会重置到默认状态。
 switches:
   - name: ascii_mode
-    states: [ 中, A ]
+    states: [ 中, Ａ ]
     reset: 0
   - name: ascii_punct # 中英标点
     states: [ ¥, $ ]
@@ -77,6 +77,7 @@ engine:
     - lua_translator@unicode              # Unicode
     - lua_translator@number_translator    # 数字、金额大写
   filters:
+    - lua_filter@corrector                # 错音错字提示
     - simplifier@emoji                    # Emoji
     - simplifier@traditionalize           # 简繁切换
     - lua_filter@autocap_filter           # 英文自动大写
@@ -93,35 +94,47 @@ date_translator:
   timestamp: timestamp  # 时间戳： 1669716794
 
 
-# Lua 配置: 降低部分英语单词在候选项的位置
+# Lua 配置: 降低部分英语单词在候选项的位置。
 # 详细介绍 https://dvel.me/posts/make-rime-en-better/#短单词置顶的问题
 # 正常情况： 输入 rug 得到 「1.rug 2.如果 …… 」
 # 降低之后： 输入 rug 得到 「1.如果 2.rug …… 」
+# 几种模式：
+# all     降低所有 3~4 位长度、前 2~3 位是完整拼音、最后一位是声母的单词
+# none    不降低任何单词，相当于没有启用这个 Lua
+# custom  自定义，只降低 custom 里的
+# （匹配的是编码，不是单词）
 reduce_english_filter:
-  # 降低到第 idx 个位置
-  idx: 2
-  # 要降低的单词，匹配的是输入码，即全小写。
-  words: [nav,
-  rug, bus, ship, laos, bail, bam, bans, bib, bos, chic, chit, dab, dag,
-  dal, dit, dub, dug, fab, gam, ger, gus, hem, hep, hud, kat, lam, lax, lex, lug,
-  lux, moc, mos, mot, mum, nad, nay, nib, nip, pak, pap, pax, rig, rum, sac, sal,
-  sax, sec, shin, sis, ska, slang, sus, tad, taj, tac, tic, yep, yum, fax, cain,
-  key, mob, buy, dam, wap, yes, but, put, lag, buf, lip, aid, aim, dig, dim, din,
-  dip, pail, cad, chap, bend, lid]
-
-
-# 引入八股文
-grammar:
-  language: zh-hans-t-essay-bgw
+  mode: custom  # all | none | custom
+  idx: 2        # 降低到第 idx 个位置
+  # 自定义的单词列表，示例列表没有降低部分常用单词，如 and cat mail Mac but bad shit ……
+  words: [aid, ann,
+  bail, bait, bam, band, bans, bat, bay, bend, bent, benz, bib, bid, bien, biz, boc, bop, bos, bud, buf,
+  cab, cad, cain, cam, cans, cap, cas, cef, chad, chan, chap, chef, cher, chew, chic, chin, chip, chit, coup, cum, cunt, cur,
+  dab, dag, dal, dam, dent, dew, dial, diet, dim, din, dip, dis, dit, doug, dub, dug, dunn,
+  fab, fax, fob, fog, foul, fur,
+  gag, gail, gain, gal, gam, gaol, ged, gel, ger, guam, gus, gut,
+  hail, ham, hank, hans, hat, hay, heil, heir, hem, hep, hud, hum, hung, hunk, hut,
+  jim, jug,
+  kat,
+  lab, lad, lag, laid, lam, laos, lap, lat, lax, lay, led, leg, lex, liam, lib, lid, lied, lien, lies, linn, lip, lit, liz, lob, lug, lund, lung, lux,
+  mag, maid, mann, mar, mat, med, mel, mend, mens, ment, mil, mins, mint, mob, moc, mod, mop, mos, mot, mud, mug, mum, nail,
+  nap, nat, nay, neil, nib, nip, noun, nous, nun, nut,
+  pac, paid, pail, pain, pair, pak, pal, pam, pans, pant, pap, par, pat, paw, pax, pens, pic, pier, pies, pins, pint, pit, pix, pod, pop, pos, pot, pour, pow, pub,
+  rand, rant, rent, rep, res, ret, rex, rib, rid, rig, rim, rub, rug, rum, runs,
+  sac, sail, sal, sam, sans, sap, saw, sax, sew, sham, shaw, shin, sig, sin, sip, sis, suit, sung, suns, sup, sur, sus,
+  tad, tail, taj, tar, tax, tec, ted, tel, ter, tex, tic, tied, tier, ties, tim, tin, tit, tour, tout, tum,
+  wag, wand, wap, wax, weir, won,
+  yan, yen]
 
 
 # 主翻译器，拼音
 translator:
-  dictionary: rime_ice          # 挂载词库 rime_ice.dict.yaml
-  prism: double_pinyin_flypy    # 多方案共用一个词库时，为避免冲突，需要用 prism 指定一个名字。
-  contextual_suggestions: true  # 开启八股文
-  initial_quality: 1.2          # 拼音的权重应该比英文大
-  preedit_format:               # preedit_format 影响到输入框的显示和“Shift+回车”上屏的字符
+  dictionary: rime_ice           # 挂载词库 rime_ice.dict.yaml
+  prism: double_pinyin_flypy     # 多方案共用一个词库时，为避免冲突，需要用 prism 指定一个名字。
+  spelling_hints: 8              # corrector.lua ：为了让错音错字提示的 Lua 同时适配全拼双拼，将拼音显示在 comment 中
+  always_show_comments: true     # corrector.lua ：Rime 默认在 preedit 等于 comment 时取消显示 comment，这里强制一直显示，供 corrector.lua 做判断用。
+  initial_quality: 1.2           # 拼音的权重应该比英文大
+  preedit_format:                # preedit_format 影响到输入框的显示和“Shift+回车”上屏的字符
     - xform/([bpmfdtnljqx])n/$1iao/
     - xform/(\w)g/$1eng/
     - xform/(\w)q/$1iu/
@@ -238,31 +251,30 @@ speller:
     - derive/^([jqxy])u$/$1v/
     - derive/^([aoe])([ioun])$/$1$1$2/
     - xform/^([aoe])(ng)?$/$1$1$2/
-    - xform/iu$/ǫ/
-    - xform/(.)ei$/$1ᴡ/
-    - xform/uan$/ʀ/
-    - xform/[uv]e$/ᴛ/
-    - xform/un$/ʏ/
-    - xform/^sh/ᴜ/
-    - xform/^ch/ɪ/
-    - xform/^zh/ᴠ/
-    - xform/uo$/ᴏ/
-    - xform/ie$/ᴘ/
-    - xform/i?ong$/s/
-    - xform/ing$|uai$/ᴋ/
-    - xform/(.)ai$/$1ᴅ/
-    - xform/(.)en$/$1ғ/
-    - xform/(.)eng$/$1ɢ/
-    - xform/[iu]ang$/ʟ/
-    - xform/(.)ang$/$1ʜ/
-    - xform/ian$/ᴍ/
-    - xform/(.)an$/$1ᴊ/
-    - xform/(.)ou$/$1ᴢ/
-    - xform/[iu]a$/x/
-    - xform/iao$/ɴ/
-    - xform/(.)ao$/$1ᴄ/
-    - xform/ui$/ᴠ/
-    - xform/in$/ʙ/
-    - xlit/ǫᴡʀᴛʏᴜɪᴏᴘsᴅғɢʜᴊᴋʟᴢxᴄᴠʙɴᴍ/qwrtyuiopsdfghjklzxcvbnm/
-    - abbrev/^(.).+$/$1/  # 首字母简拼
-  
+    - xform/iu$/Ⓠ/
+    - xform/(.)ei$/$1Ⓦ/
+    - xform/uan$/Ⓡ/
+    - xform/[uv]e$/Ⓣ/
+    - xform/un$/Ⓨ/
+    - xform/^sh/Ⓤ/
+    - xform/^ch/Ⓘ/
+    - xform/^zh/Ⓥ/
+    - xform/uo$/Ⓞ/
+    - xform/ie$/Ⓟ/
+    - xform/(.)i?ong$/$1Ⓢ/
+    - xform/ing$|uai$/Ⓚ/
+    - xform/(.)ai$/$1Ⓓ/
+    - xform/(.)en$/$1Ⓕ/
+    - xform/(.)eng$/$1Ⓖ/
+    - xform/[iu]ang$/Ⓛ/
+    - xform/(.)ang$/$1Ⓗ/
+    - xform/ian$/Ⓜ/
+    - xform/(.)an$/$1Ⓙ/
+    - xform/(.)ou$/$1Ⓩ/
+    - xform/[iu]a$/Ⓧ/
+    - xform/iao$/Ⓝ/
+    - xform/(.)ao$/$1Ⓒ/
+    - xform/ui$/Ⓥ/
+    - xform/in$/Ⓑ/
+    - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
+    # - abbrev/^(.).+$/$1/  # 首字母简拼，开启后会导致 3 个字母时 kj'x 变成 k'jx 的问题
