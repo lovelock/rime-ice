@@ -11,6 +11,9 @@ select_character = require("select_character")
 -- 日期时间，可在方案中配置触发关键字。
 date_translator = require("date_translator")
 
+-- 农历，可在方案中配置触发关键字。
+lunar = require("lunar")
+
 -- Unicode，U 开头
 unicode = require("unicode")
 
@@ -72,5 +75,6 @@ is_in_user_dict = require("is_in_user_dict")
 -- 在 key_binder 增加快捷键：
 -- turn_down_cand: "Control+j"  # 匹配当前输入码后隐藏指定的候选字词 或候选词条放到第四候选位置
 -- drop_cand: "Control+d"       # 强制删词, 无视输入的编码
+-- get_record_filername() 函数中仅支持了 Windows、macOS、Linux
 cold_word_drop_processor = require("cold_word_drop.processor")
 cold_word_drop_filter = require("cold_word_drop.filter")
