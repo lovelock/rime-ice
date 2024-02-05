@@ -7,7 +7,7 @@
 #
 ---
 name: en_ext
-version: "2024-01-14"
+version: "2024-02-03"
 sort: by_weight
 ...
 # 一些杂项
@@ -587,14 +587,13 @@ MongoDB	MongoDB
 MySQL	MySQL
 Node.js	Node.js
 Pornhub	Pornhub
-PostgreSQL	PostgreSQL
 Postgres	Postgres
 PowerPoint	PowerPoint
 PPT	PPT
 PowerPoint	PPT
 Microsoft PowerPoint	PPT
 PyCharm	PyCharm
-Roguelike	Roguelike
+roguelike	roguelike
 Redis	Redis
 rime	rime
 RION	RION
@@ -767,6 +766,7 @@ IPN	IPN
 IPTV	IPTV
 iStat Menus	iStatMenus
 iTerm	iTerm
+iTerm2	iTerm2
 iTunes	iTunes
 iTunes Connect	iTunesConnect
 iTunes Match	iTunesMatch
@@ -819,8 +819,7 @@ OneNote	OneNote
 OS	OS
 Operating System	OS
 Operating System	OperatingSystem
-Overcast	Overcast
-Overflow	Overflow
+overcast	overcast
 PaintCode	PaintCode
 Parallels Desktop	ParallelsDesktop
 PayPal	PayPal
@@ -1197,7 +1196,6 @@ TickTick	TickTick
 CHDBits	CHDBits
 M-Team	M-Team
 Vim	Vim
-Wikipedia	Wikipedia
 Google Voice	GoogleVoice
 Workers	Workers
 Cloudflare Workers	CloudflareWorkers
@@ -1423,13 +1421,10 @@ PopCap Games	PopCapGames
 Cyberpunk	Cyberpunk
 Kotlin	Kotlin
 PhpStorm	PhpStorm
-Rider	Rider
 Datalore	Datalore
 DataSpell	DataSpell
 RubyMine	RubyMine
 AppCode	AppCode
-PyCharm Edu	PyCharmEdu
-IntelliJ IDEA Edu	IntelliJIDEAEdu
 Code With Me	CodeWithMe
 JetBrains Mono	JetBrainsMono
 JVM	JVM
@@ -1944,6 +1939,7 @@ Aquarius	Aquarius
 Pisces	Pisces
 tailwind	tailwind
 Fcitx	Fcitx
+Fcitx5	Fcitx5
 openSUSE	openSUSE
 defer	defer
 FOMO	FOMO
@@ -2199,6 +2195,7 @@ Loki	Loki
 panzer	panzer
 hardened	hardened
 motherfucker	motherfucker
+motherfuckers	motherfuckers
 motherfucking	motherfucking
 dict	dict
 latte	latte
@@ -2403,3 +2400,40 @@ Melvor Idle	MelvorIdle
 paradise	paradise
 ketchup	ketchup
 pinning	pinning
+WebSocket	WebSocket
+systemctl	systemctl
+reconfig	reconfig
+sudo	sudo
+flypy	flypy
+traefik	traefik
+deepin	deepin
+srv	srv
+usr	usr
+bin	bin
+AUR	AUR
+Arch User Repository	AUR
+pacman	pacman
+Pac-Man	Pac-Man
+eBPF	eBPF
+livid	livid
+DevOps	DevOps
+Zippo	Zippo
+goddamn	goddamn
+punctuator	punctuator
+punctuators	punctuators
+QR code	QRcode
+sentry	sentry
+Grafana	Grafana
+Mirtle	Mirtle
+Hadoop	Hadoop
+HBase	HBase
+hive	hive
+Flink	Flink
+Palworld	Palworld
+lark	lark
+submodule	submodule
+submodules	submodules
+Writerside	Writerside
+groundhog	groundhog
+groundhogs	groundhogs
+Writerside	Writerside

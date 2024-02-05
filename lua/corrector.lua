@@ -12,9 +12,9 @@
 local M = {}
 
 function M.init(env)
-    local config = env.engine.schema.config
-    env.name_space = env.name_space:gsub('^*', '')
-    M.style = config:get_string(env.name_space) or '{comment}'
+	local config = env.engine.schema.config
+	env.name_space = env.name_space:gsub('^*', '')
+	M.style = config:get_string(env.name_space) or '{comment}'
 	M.corrections = {
 		-- 错音
 		["hun dun"] = { text = "馄饨", comment = "hún tun" },
@@ -62,7 +62,7 @@ function M.init(env)
 		["ka bo zi"] = { text = "卡脖子", comment = "qiǎ bó zi" },
 		["zhi sheng"] = { text = "吱声", comment = "zī shēng" },
 		["chan he"] = { text = "掺和", comment = "chān huo" },
-		["chan huo"] = { text = "掺和", comment = "chān huo" },
+		["can huo"] = { text = "掺和", comment = "chān huo" },
 		["can he"] = { text = "掺和", comment = "chān huo" },
 		["cheng zhi"] = { text = "称职", comment = "chèn zhí" },
 		["luo shi fen"] = { text = "螺蛳粉", comment = "luó sī fěn" },
@@ -76,11 +76,12 @@ function M.init(env)
 		["bo jing er"] = { text = "脖颈儿", comment = "bó gěng er" },
 		["jie zha"] = { text = "结扎", comment = "jié zā" },
 		["hai shen wei"] = { text = "海参崴", comment = "hǎi shēn wǎi" },
-		["hou pu"] = { text = "厚朴", comment = "hòu pò" },
+		["hou pu"] = { text = "厚朴", comment = "hòu pò " },
 		["da wan ma"] = { text = "大宛马", comment = "dà yuān mǎ" },
-		["ci ya"] = { text = "龇牙", comment = "龇(zī)牙" },
-		["ci zhe ya"] = { text = "龇着牙", comment = "龇(zī)着牙" },
-		["ci ya lie zui"] = { text = "龇牙咧嘴", comment = "龇(zī)牙咧嘴" },
+		["ci ya"] = { text = "龇牙", comment = "zī yá" },
+		["ci zhe ya"] = { text = "龇着牙", comment = "zī zhe yá" },
+		["ci ya lie zui"] = { text = "龇牙咧嘴", comment = "zī yá liě zuǐ" },
+		["tou pi xue"] = { text = "头皮屑", comment = "tóu pi xiè" },
 		-- 错字
 		["pu jie"] = { text = "扑街", comment = "仆街" },
 		["pu gai"] = { text = "扑街", comment = "仆街" },
@@ -98,7 +99,7 @@ function M.init(env)
 		["da jia lai zhao cha"] = { text = "大家来找茬", comment = "大家来找碴" },
 		["da jia lai zhao cha er"] = { text = "大家来找茬儿", comment = "大家来找碴儿" },
 		["cou huo"] = { text = "凑活", comment = "凑合(he)" },
-	}	
+	}
 end
 
 function M.func(input)
