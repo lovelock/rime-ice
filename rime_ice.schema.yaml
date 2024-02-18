@@ -6,7 +6,7 @@
 schema:
   schema_id: rime_ice
   name: 雾凇拼音
-  version: "2024-02-01"
+  version: "2024-02-11"
   author:
     - Dvel
   description: |
@@ -18,8 +18,9 @@ schema:
 
 
 # 开关
-# states: 方案选单显示的名称。可以注释掉，仍可以通过快捷键切换。
 # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
+# states: 方案选单显示的名称。可以注释掉，仍可以通过快捷键切换。
+# abbrev: 默认的缩写取 states 的第一个字符，abbrev 可自定义一个字符
 switches:
   - name: ascii_mode
     states: [ 中, Ａ ]
@@ -41,8 +42,8 @@ switches:
 engine:
   processors:
     - lua_processor@select_character          # 以词定字
-    - lua_processor@auto_commit_single_punct  # 让写在 alphabet 中的某标点自动上屏
     - ascii_composer
+    - lua_processor@auto_commit_single_punct  # 让写在 alphabet 中的某标点自动上屏
     - recognizer
     - key_binder
     - speller
@@ -68,16 +69,18 @@ engine:
     - table_translator@radical_lookup   # 部件拆字反查
     - lua_translator@unicode            # Unicode
     - lua_translator@number_translator  # 数字、金额大写
+    - lua_translator@force_gc           # 暴力 GC
   filters:
     - lua_filter@corrector                          # 错音错字提示
-    - simplifier@emoji                              # Emoji
-    - simplifier@traditionalize                     # 简繁切换
     - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜
     - lua_filter@search@radical_pinyin              # 部件拆字辅码
-    - lua_filter@v_filter                           # v 模式 symbols 优先（否则是英文优先）
     - lua_filter@autocap_filter                     # 英文自动大写
+    - lua_filter@v_filter                           # v 模式 symbols 优先
+    - lua_filter@pin_cand_filter                    # 置顶候选项（顺序要求：置顶候选项 > Emoji > 简繁切换）
+    - lua_filter@long_word_filter                   # 长词优先（顺序要求：长词优先 > Emoji）
+    - simplifier@emoji                              # Emoji
+    - simplifier@traditionalize                     # 简繁切换
     - lua_filter@reduce_english_filter              # 降低部分英语单词在候选项的位置
-    - lua_filter@pin_cand_filter                    # 置顶候选项
     - uniquifier                                    # 去重
 
 
@@ -92,6 +95,14 @@ date_translator:
 
 # Lua 配置：农历的触发关键字
 lunar: nl  # 农历： 二〇二三年冬月二十 癸卯年（兔）冬月二十
+
+
+# Lua 配置：长词优先
+# 提升 count 个词语，插入到第 idx 个位置。
+# 示例：将 2 个词插入到第 4、5 个候选项，输入 jie 得到「1接 2解 3姐 4饥饿 5极恶」
+long_word_filter:
+  count: 2
+  idx: 4
 
 
 # Lua 配置：直接上屏单个字符
@@ -120,49 +131,50 @@ reduce_english_filter:
   idx: 2        # 降低到第 idx 个位置
   # 自定义的单词列表，示例列表没有降低部分常用单词，如 and cat mail Mac but bad shit ……
   words: [aid, ann,
-  bail, bait, bam, band, bans, bat, bay, bend, bent, benz, bib, bid, bien, biz, boc, bop, bos, bud, buf,
-  cab, cad, cain, cam, cans, cap, cas, cef, chad, chan, chap, chef, cher, chew, chic, chin, chip, chit, coup, cum, cunt, cur,
+  bail, bait, bam, band, bans, bat, bay, bend, bent, benz, bib, bid, bien, biz, boc, bop, bos, bud, buf, bach, bench, bush,
+  cab, cad, cain, cam, cans, cap, cas, cef, chad, chan, chap, chef, cher, chew, chic, chin, chip, chit, coup, cum, cunt, cur, couch,
   dab, dag, dal, dam, dent, dew, dial, diet, dim, din, dip, dis, dit, doug, dub, dug, dunn,
   fab, fax, fob, fog, foul, fur,
   gag, gail, gain, gal, gam, gaol, ged, gel, ger, guam, gus, gut,
-  hail, ham, hank, hans, hat, hay, heil, heir, hem, hep, hud, hum, hung, hunk, hut,
+  hail, ham, hank, hans, hat, hay, heil, heir, hem, hep, hud, hum, hung, hunk, hut, hush,
   jim, jug,
   kat,
-  lab, lad, lag, laid, lam, laos, lap, lat, lax, lay, led, leg, lex, liam, lib, lid, lied, lien, lies, linn, lip, lit, liz, lob, lug, lund, lung, lux,
-  mag, maid, mann, mar, mat, med, mel, mend, mens, ment, mil, mins, mint, mob, moc, mop, mos, mot, mud, mug, mum, nail,
-  nap, nat, nay, neil, nib, nip, noun, nous, nun, nut,
-  pac, paid, pail, pain, pair, pak, pal, pam, pans, pant, pap, par, pat, paw, pax, pens, pic, pier, pies, pins, pint, pit, pix, pod, pop, pos, pot, pour, pow, pub,
-  rand, rant, rent, rep, res, ret, rex, rib, rid, rig, rim, rub, rug, rum, runc, runs,
+  lab, lad, lag, laid, lam, laos, lap, lat, lax, lay, led, leg, lex, liam, lib, lid, lied, lien, lies, linn, lip, lit, liz, lob, lug, lund, lung, lux, lash, loch, lush,
+  mag, maid, mann, mar, mat, med, mel, mend, mens, ment, mil, mins, mint, mob, moc, mop, mos, mot, mud, mug, mum, mesh,
+  nap, nat, nay, neil, nib, nip, noun, nous, nun, nut, nail, nash,
+  pac, paid, pail, pain, pair, pak, pal, pam, pans, pant, pap, par, pat, paw, pax, pens, pic, pier, pies, pins, pint, pit, pix, pod, pop, pos, pot, pour, pow, pub, pinch, pouch,
+  rand, rant, rent, rep, res, ret, rex, rib, rid, rig, rim, rub, rug, rum, runc, runs, ranch,
   sac, sail, sal, sam, sans, sap, saw, sax, sew, sham, shaw, shin, sig, sin, sip, sis, suit, sung, suns, sup, sur, sus,
   tad, tail, taj, tar, tax, tec, ted, tel, ter, tex, tic, tied, tier, ties, tim, tin, tit, tour, tout, tum,
   wag, wand, womens, wap, wax, weir, won,
-  yan, yen]
+  yan, yen,
+  zach]
 
 
 # Lua 配置: 置顶候选项
-#TODO 文档和示例
+# 注释太长了，请参考 pin_cand_filter.lua 开头的说明书。
 pin_cand_filter:
   # 格式：编码<Tab>字词1<Space>字词2……
-  # ⚙️ 以下是个人习惯，仅供参考，可以打个补丁来覆盖。
+  # ⚙️ 以下是个人习惯，仅供参考，推荐打补丁用自己的习惯覆盖。
   # 单编码
   - q	去 千
   - w	我 万 往
-  - e	呃 🤔
+  - e	呃
   - r	让 人
   - t	他 她 它 祂
   - y	与 于
-  # - u 在 custom_phrase 置顶
-  # - i 在 custom_phrase 置顶
-  - o	哦 😮
+  # - u 在 custom_phrase 置顶了 有 🈶 又 由
+  # - i 在 custom_phrase 置顶了 一 1️⃣ 以 已 亦
+  - o	哦
   - p	片 篇
-  - a	啊 😲 😦 😧
+  - a	啊
   - s	是 时 使 式
   - d	的 地 得
   - f	发 放 分
   - g	个 各
   - h	和 或
   - j	及 将 即 既 继
-  - k	可 🉑
+  - k	可
   - l	了 啦 喽 嘞
   - z	在 再 自
   - x	想 像 向
@@ -176,27 +188,27 @@ pin_cand_filter:
   - qu	去
   - wo	我
   - wei	为
-  - er	而 儿 二 2️⃣
+  - er	而 儿 二
   - en	嗯
   - rang	让
   - ta	他 她 它 祂
   - tai	太
   - tong	同
   - yu	与 于
-  - you	有 🈶 又 由
+  - you	有 又 由
   - yao	要
   - ye	也
   - shi	是 时 使 式
   - suo	所
-  - shang	上 ⬆️ ↑
+  - shang	上
   - shuo	说
   - de	的 地 得
   - dan	但
   - dou	都
   - dao	到 倒
-  - dian	点 · 丶
+  - dian	点
   - dang	当
-  - dui	对 ⭕ ✅ ✔
+  - dui	对
   - fa	发
   - ge	个 各
   - gang	刚
@@ -204,12 +216,12 @@ pin_cand_filter:
   - huo	或
   - hui	会
   - hai	还
-  - hao	好 👌 🙆‍♂️ 🙆‍♀️
+  - hao	好
   - ji	及 即 既
   - jiu	就
   - jiang	将
-  - ke	可 🉑
-  - kan	看 👀
+  - ke	可
+  - kan	看
   - kai	开
   - le	了
   - la	啦 拉
@@ -221,11 +233,11 @@ pin_cand_filter:
   - zhen	真
   - zui	最
   - zheng	正
-  - zuo	做 坐 左 ⬅️ ←
+  - zuo	做 坐 左
   - ze	则
   - xiang	想 像 向
   - xian	先
-  - xia	下 ⬇️ ↓
+  - xia	下
   - xing	行
   - cai	才
   - cong	从
@@ -268,7 +280,7 @@ pin_cand_filter:
   - hh	哈哈
   - kk	看看
   - cc	常常
-  - xx	想想 🤔 想象
+  - xx	想想 想象
   - yw	因为
   - sm	什么
   - wsm	为什么
@@ -310,7 +322,7 @@ cn_en:
   db_class: stabledb
   enable_completion: true
   enable_sentence: false
-  initial_quality: 1.1
+  initial_quality: 0.5
   comment_format:
     - xform/^.+$//
 
@@ -366,7 +378,9 @@ radical_lookup:
 # 部件拆字滤镜
 radical_reverse_lookup:
   tags: [ radical_lookup ]
-  dictionary: rime_ice  # 拼音标注来源，可将 other/single_pinyin.reverse.bin 拷贝至 build/ 目录，此处改为 single_pinyin 来为所有字显示拼音
+  # dictionary 为拼音标注来源。目前是显示本方案词库的注音，可去部件拆字方案下载更全的、带声调的、已编译好的词典
+  # https://github.com/mirtlecn/rime-radical-pinyin?tab=readme-ov-file#%E5%8F%8D%E6%9F%A5%E5%B8%A6%E5%A3%B0%E8%B0%83%E6%B3%A8%E9%9F%B3
+  dictionary: rime_ice
   # comment_format:     # 自定义 comment，例如在左右加上括号
   #  - xform/^/(/
   #  - xform/$/)/
@@ -450,11 +464,11 @@ speller:
     - abbrev/^([zcs]h).+$/$1/  # 超级简拼中，zh ch sh 视为整体（ch'sh → 城市），而不是像这样分开（c'h's'h → 吃好睡好）。
 
     ### v u 转换
-    # 雾凇的词库严格按照正确的 u v(ü) 注音的，如 qu 和 nve，支持使用 qv 和 nue 来输入
-    # 再增加对其他词库的 qv nue 这种注音的支持
-    - derive/^([nl])ue$/$1ve/
+    # 雾凇的词库严格按照正确的 u v(ü) 注音的，支持使用 qu/qv nue/nve 来输入 qu nve
     - derive/^([nl])ve$/$1ue/
     - derive/^([jqxy])u/$1v/
+    # 以防引入的其他词库没按照正确方式注音，也做一个转换
+    - derive/^([nl])ue$/$1ve/
     - derive/^([jqxy])v/$1u/
 
     ### 自动纠错
