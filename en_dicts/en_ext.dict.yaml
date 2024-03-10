@@ -7,7 +7,7 @@
 #
 ---
 name: en_ext
-version: "2024-02-10"
+version: "2024-02-27"
 sort: by_weight
 ...
 # 一些杂项
@@ -585,6 +585,8 @@ markdown	markdown
 Microsoft Access	Access
 MongoDB	MongoDB
 MySQL	MySQL
+MyISAM	MyISAM
+InnoDB	InnoDB
 Node.js	Node.js
 Pornhub	Pornhub
 Postgres	Postgres
@@ -858,7 +860,6 @@ Software Development Kit	SoftwareDevelopmentKit
 Should I Sleep	ShouldISleep
 Simplenote	Simplenote
 Siri	Siri
-Sketch	Sketch
 Slicy	Slicy
 Snagit	Snagit
 Sparkbox	Sparkbox
@@ -937,6 +938,7 @@ WSGI	WSGI
 BTC	BTC
 Bitcoin	BTC
 Bitcoin	Bitcoin
+Blockchain	Blockchain
 gank	gank
 debuff	debuff
 MagSafe	MagSafe
@@ -2178,6 +2180,8 @@ personalization	personalization
 K8s	K8s
 Kubernetes	K8s
 Kubernetes	Kubernetes
+Kubeadm	Kubeadm
+Minikube	Minikube
 containerized	containerized
 shitty	shitty
 shitwork	shitwork
@@ -2422,6 +2426,7 @@ punctuator	punctuator
 punctuators	punctuators
 QR code	QRcode
 sentry	sentry
+Prometheus	Prometheus
 Grafana	Grafana
 Mirtle	Mirtle
 Hadoop	Hadoop
@@ -2441,3 +2446,17 @@ Manifest V3	ManifestV3
 copycat	copycat
 Google Gemini	GoogleGemini
 Google Gemini Advanced	GoogleGeminiAdvanced
+infuse	infuse
+headless	headless
+IMBA	IMBA
+imbalance	imbalance
+imbalanced	imbalanced
+GitButler	GitButler
+Sora	Sora
+WinNAS	WinNAS
+prune	prune
+Wireshark	Wireshark
+Theseus	Theseus
+Laravel	Laravel
+monolith	monolith
+Chiikawa	Chiikawa
