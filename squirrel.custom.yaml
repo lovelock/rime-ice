@@ -53,21 +53,117 @@ patch:
   # 选择皮肤，亮色与暗色主题
   style/candidate_list_layout: linear   # 候选排布：层叠 stacked | 行 linear
   style/text_orientation: horizontal    # 行文向： 横 horizontal | 纵 vertical
-  style/color_scheme: mac_light
-  style/color_scheme_dark: mac_dark
+  style/color_scheme: lost_temple
+  style/color_scheme_dark: lost_temple
 
 
   # 皮肤列表
   preset_color_schemes:
     # 下面是内置的皮肤 /Library/Input Methods/Squirrel.app/Contents/SharedSupport/squirrel.yaml
+    mint_dark_green:
+      name: "碧月青／Mint Dark Green"
+      author: Mintimate <"Mintimate's Blog">
+      translucency: true                      # 磨砂： false | true
+      mutual_exclusive: false                 # 色不叠加： false | true
+      color_space: srgb
+      back_color: 0x323232                    # 底色
+      candidate_text_color: 0xE8E8E8          # 文字颜色
+      comment_text_color: 0xBEBEBE            # 注颜色
+      label_color: 0xB0B0B0                   # 序号颜色
+      hilited_candidate_back_color: 0x83C81C  # 选中底色
+      hilited_candidate_text_color: 0xEFEFEF  # 选中文字颜色
+      hilited_comment_text_color: 0xF4FAF8    # 选中注颜色
+      hilited_candidate_label_color: 0xEFEFEF # 选中序号颜色
+      text_color: 0x83C81C                    # 拼音颜色 （inline_preedit: false）
+      hilited_text_color: 0xed9564            # 选中拼音颜色 （inline_preedit: false）
+      font_face: "PingFangSC-Regular"
+      font_point: 18.0
+      label_font_face: "PingFangSC-Regular"
+      label_font_point: 14.0
+      comment_font_face: "PingFangSC-Regular"
+      comment_font_point: 14.0
 
-    native:
-      name: 系統配色
+    mint_light_blue:
+      name: "蓝水鸭／Mint Light Blue"
+      author: Mintimate <"Mintimate's Blog">
+      translucency: true                     # 磨砂： false | true
+      mutual_exclusive: false                 # 色不叠加： false | true
+      shadow_size: 0                          # 阴影大小
+      line_spacing: 5                         # 行间距
+      # base_offset: 0                          # 字基高(Action版本鼠须管会崩溃)
+      alpha: 1                                # 透明度，0~1
+      spacing: 10                             # 拼音与候选项之间的距离 （inline_preedit: false）
+      back_color: 0xefefef                    # 底色
+      hilited_candidate_back_color: 0xed9564  # 选中底色
+      label_color: 0xcac9c8                   # 序号颜色
+      hilited_candidate_label_color: 0xefefef # 选中序号颜色
+      candidate_text_color: 0x424242          # 文字颜色
+      hilited_candidate_text_color: 0xefefef  # 选中文字颜色
+      comment_text_color: 0xcac9c8            # 注颜色
+      hilited_comment_text_color: 0xefefef    # 选中注颜色
+      text_color: 0x6495ed                    # 拼音颜色 （inline_preedit: false）
+      hilited_text_color: 0xed9564            # 选中拼音颜色 （inline_preedit: false）
+      font_face: "PingFangSC-Regular"
+      font_point: 18.0
+      label_font_face: "PingFangSC-Regular"
+      label_font_point: 14.0
+      comment_font_face: "PingFangSC-Regular"
+      comment_font_point: 14.0
+    
+    mint_dark_blue:
+      name: 黑水鸭／Mint Dark Blue
+      author: Mintimate <"Mintimate's Blog">
+      translucency: true                     # 磨砂： false | true
+      mutual_exclusive: false                 # 色不叠加： false | true
+      shadow_size: 0                          # 阴影大小
+      line_spacing: 5                         # 行间距
+      # base_offset: 0                          # 字基高(Action版本鼠须管会崩溃)
+      alpha: 1                                # 透明度，0~1
+      spacing: 10                             # 拼音与候选项之间的距离 （inline_preedit: false）
+      back_color: 0x424242                    # 底色
+      hilited_candidate_back_color: 0xc6c01a  # 选中底色
+      label_color: 0xefefef                   # 序号颜色
+      hilited_candidate_label_color: 0xefefef # 选中序号颜色
+      candidate_text_color: 0xefefef          # 文字颜色
+      hilited_candidate_text_color: 0xefefef  # 选中文字颜色
+      comment_text_color: 0xefefef            # 注颜色
+      hilited_comment_text_color: 0xffffff    # 选中注颜色
+      text_color: 0x6495ed                    # 拼音颜色 （inline_preedit: false）
+      hilited_text_color: 0xc6c01a            # 选中拼音颜色 （inline_preedit: false）
+      font_face: "PingFangSC-Regular"
+      font_point: 18.0
+      label_font_face: "PingFangSC-Regular"
+      label_font_point: 14.0
+      comment_font_face: "PingFangSC-Regular"
+      comment_font_point: 14.0
+      
+    mint_light_green:
+      name: "碧皓青／Mint Light Green"
+      author: Mintimate <"Mintimate's Blog">
+      translucency: true                      # 磨砂： false | true
+      mutual_exclusive: false                 # 色不叠加： false | true
+      color_space: srgb
+      back_color: 0xEFEFEF                    # 底色
+      candidate_text_color: 0x323232          # 文字颜色
+      comment_text_color: 0x878787            # 注颜色
+      label_color: 0x323232                   # 序号颜色
+      hilited_candidate_back_color: 0x7BAE4F  # 选中底色
+      hilited_candidate_text_color: 0xFFFFFF  # 选中文字颜色
+      hilited_comment_text_color: 0xDFF0EE    # 选中注颜色
+      hilited_candidate_label_color: 0xEFEFEF # 选中序号颜色
+      text_color: 0x7BAE4F                    # 拼音颜色 （inline_preedit: false）
+      hilited_text_color: 0xed9564            # 选中拼音颜色 （inline_preedit: false）
+      font_face: "PingFangSC-Regular"
+      font_point: 18.0
+      label_font_face: "PingFangSC-Regular"
+      label_font_point: 14.0
+      comment_font_face: "PingFangSC-Regular"
+      comment_font_point: 14.0
 
     mac_light:
       name: "mac_light"
       font_face: "PingFangSC-Regular"
-      font_point: 16.0
+      font_point: 18.0
       label_font_face: "PingFangSC-Regular"
       label_font_point: 14.0
       comment_font_face: "PingFangSC-Regular"
@@ -86,11 +182,12 @@ patch:
       text_color: 0x3F000000
       hilited_text_color: 0xD8000000
       inline_preedit: true #单行显示，false双行显示
+      corner_radius: 5.0
 
     mac_dark:
       name: "mac_dark"
       font_face: "PingFangSC-Regular"
-      font_point: 16.0
+      font_point: 18.0
       label_font_face: "PingFangSC-Regular"
       label_font_point: 14.0
       comment_font_face: "PingFangSC-Regular"
@@ -100,7 +197,7 @@ patch:
       inline_preedit: false
       color_space: display_p3
       back_color: 0x323332
-      candidate_text_color: 0x000000
+      candidate_text_color: 0xFFFFFF
       comment_text_color: 0x3F000000
       label_color: 0x111111
       hilited_candidate_back_color: 0xC95824
@@ -110,4 +207,21 @@ patch:
       text_color: 0x3F000000
       hilited_text_color: 0xD8000000
       inline_preedit: true #单行显示，false双行显示
+      corner_radius: 5.0
 
+    lost_temple:
+      name: 孤寺／Lost Temple
+      author: 佛振 <chen.sst@gmail.com>, based on ir_black
+      text_color: 0xe8f3f6
+      back_color: 0xee303030
+      hilited_text_color: 0x82e6ca
+      hilited_candidate_text_color: 0x000000
+      hilited_candidate_back_color: 0x82e6ca
+      comment_text_color: 0xbb82e6ca
+      hilited_comment_text_color: 0xbb203d34
+      font_face: "PingFangSC-Regular"
+      font_point: 18.0
+      label_font_face: "PingFangSC-Regular"
+      label_font_point: 14.0
+      comment_font_face: "PingFangSC-Regular"
+      comment_font_point: 14.0
