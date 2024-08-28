@@ -130,10 +130,14 @@ local function number_translatorFunc(num)
         { number2cnChar(numberPart.int, 0) ..
         decimal_func(numberPart.dec, { [1] = "角", [2] = "分", [3] = "厘", [4] = "毫" },
             { [0] = "〇", "一", "二", "三", "四", "五", "六", "七", "八", "九" }), "〔金额小写〕" })
-    table.insert(result,
-        { number2cnChar(numberPart.int, 1) ..
-        decimal_func(numberPart.dec, { [1] = "角", [2] = "分", [3] = "厘", [4] = "毫" },
-            { [0] = "零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖" }), "〔金额大写〕" })
+
+    local number2cnCharInt = number2cnChar(numberPart.int, 1)
+    local number2cnCharDec = decimal_func(numberPart.dec, { [1] = "角", [2] = "分", [3] = "厘", [4] = "毫" }, { [0] = "零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖" })
+    table.insert(result, { number2cnCharInt .. number2cnCharDec , "〔金额大写〕"})
+    if string.len(numberPart.int) > 4 and number2cnCharInt:find('^' .. '拾万') then
+        number2cnCharInt = number2cnCharInt:gsub('^' .. '拾万', '壹拾万')
+        table.insert(result, { number2cnCharInt .. number2cnCharDec , "〔金额大写〕"})
+    end
     return result
 end
 
@@ -145,7 +149,7 @@ local function number_translator(input, seg, env)
     if env.number_keyword ~= '' and input:sub(1, 1) == env.number_keyword then
         str = string.gsub(input, "^(%a+)", "")
         numberPart = number_translatorFunc(str)
-        if #numberPart > 0 then
+        if str and #str > 0 and #numberPart > 0 then
             for i = 1, #numberPart do
                 yield(Candidate(input, seg.start, seg._end, numberPart[i][1], numberPart[i][2]))
             end

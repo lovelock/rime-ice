@@ -85,10 +85,10 @@ engine:
     - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜
     - lua_filter@autocap_filter                     # 英文自动大写
     - lua_filter@pin_cand_filter                    # 置顶候选项（顺序要求：置顶候选项 > Emoji > 简繁切换）
+    - lua_filter@reduce_english_filter              # 降低部分英语单词在候选项的位置
     - simplifier@emoji                              # Emoji
     - simplifier@traditionalize                     # 简繁切换
     - lua_filter@search@radical_pinyin              # 部件拆字辅码
-    - lua_filter@reduce_english_filter              # 降低部分英语单词在候选项的位置
     - uniquifier                                    # 去重
 
 
@@ -157,16 +157,20 @@ pin_cand_filter:
 # 主翻译器，拼音
 translator:
   dictionary: rime_ice          # 挂载词库 rime_ice.dict.yaml
+  enable_word_completion: true  # 大于 4 音节的词条自动补全，librime > 1.11.2
   prism: double_pinyin_ziguang  # 多方案共用一个词库时，为避免冲突，需要用 prism 指定一个名字。
   spelling_hints: 8             # corrector.lua ：为了让错音错字提示的 Lua 同时适配全拼双拼，将拼音显示在 comment 中
   always_show_comments: true    # corrector.lua ：Rime 默认在 preedit 等于 comment 时取消显示 comment，这里强制一直显示，供 corrector.lua 做判断用。
   initial_quality: 1.2          # 拼音的权重应该比英文大
+  comment_format:               # 标记拼音注释，供 corrector.lua 做判断用
+    - xform/^/［/
+    - xform/$/］/
   preedit_format:               # preedit_format 影响到输入框的显示和“Shift+回车”上屏的字符
     - xform/o(\w)/0$1/              # 零聲母先改爲0，以方便後面的轉換
     - xform/([jqxy])n/$1ue/         # 提前轉換雙拼碼 n 和 g，因爲轉換後的拼音裏就快要出現這兩個字母了，那時將難以分辨出雙拼碼
     - xform/([nl])n/$1ve/
     - xform/([dtgkhzcsuai])n/$1ui/
-    - xform/([nljqx])g/$1iang/
+    - xform/([nljqxb])g/$1iang/
     - xform/([gkhuai])g/$1uang/
     - xform/(\w)w/$1en/
     - xform/(\w)r/$1an/
