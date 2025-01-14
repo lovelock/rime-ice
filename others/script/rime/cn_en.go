@@ -56,7 +56,6 @@ var polyphones = map[string]string{
 	"MAC地址 > 地":     "di",
 	"OK了 > 了":       "le",
 	"OK了吗 > 了":      "le",
-	"圈X > 圈":        "quan",
 	"A型血 > 血":       "xue",
 	"A血型 > 血":       "xue",
 	"B型血 > 血":       "xue",
@@ -92,6 +91,10 @@ var polyphones = map[string]string{
 	"Chrome系 > 系":   "xi",
 	"QQ游戏大厅 > 大":    "da",
 	"QQ飞车 > 车":      "che",
+	"2G网络 > 络":      "luo",
+	"3G网络 > 络":      "luo",
+	"4G网络 > 络":      "luo",
+	"5G网络 > 络":      "luo",
 }
 
 var digitMap = map[string]string{
