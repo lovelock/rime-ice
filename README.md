@@ -1,6 +1,10 @@
 # 雾凇拼音
 
-[GPL-3.0-only](https://spdx.org/licenses/GPL-3.0-only.html)
+[![License: GPL 3.0](https://img.shields.io/badge/License-GPL--3.0--only-34ad9b)](https://www.gnu.org/licenses/gpl-3.0.txt)
+[![GitHub Release](https://img.shields.io/github/v/release/iDvel/rime-ice?filter=!nightly)](https://github.com/iDvel/rime-ice/releases/)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/iDvel/rime-ice/release.yml)](https://github.com/iDvel/rime-ice/actions/workflows/release.yml)
+![GitHub Repo stars](https://img.shields.io/github/stars/iDvel/rime-ice)
+
 
 ![demo](./others/demo.webp)
 
@@ -109,7 +113,7 @@ Linux 依赖问题的具体解释请参考 [#840](https://github.com/iDvel/rime-
 
 以下安装方式，选择其一：
 
-- [手动安装](#使用说明)
+- [手动安装](#手动安装)
 - [Git 安装](#git-安装)
 - [东风破 plum](#东风破-plum)
 - [自动部署脚本](#自动部署脚本)
