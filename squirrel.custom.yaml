@@ -8,8 +8,8 @@ patch:
   # 选择皮肤，亮色与暗色主题
   style/candidate_list_layout: linear   # 候选排布：层叠 stacked | 行 linear
   style/text_orientation: horizontal    # 行文向： 横 horizontal | 纵 vertical
-  style/color_scheme: lost_temple
-  style/color_scheme_dark: lost_temple
+  style/color_scheme: catppuccin_macchiato
+  style/color_scheme_dark: catppuccin_macchiato
 
 
   # 皮肤列表
