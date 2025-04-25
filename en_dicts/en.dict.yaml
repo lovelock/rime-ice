@@ -4,8 +4,10 @@
 #
 # https://github.com/iDvel/rime-ice
 # ------- 英文主词库 -------
-# 20k 左右的常见单词
+# 20k 左右的常见单词 + 少许补充
 #
+# en.dict.yaml 放置正经单词
+# en_ext.dict.yaml 大部分是缩写或互联网相关
 #
 # 来源：
 # 常见两万词 [20k.txt](https://github.com/first20hours/google-10000-english/)
@@ -15,7 +17,7 @@
 # 转化应当大写的单词
 ---
 name: en
-version: "2025-03-30"
+version: "2025-04-18"
 sort: by_weight
 ...
 # +_+
@@ -545,6 +547,7 @@ alcoholism	alcoholism
 ale	ale
 Alec	Alec
 alembic	alembic
+aleph	aleph
 alert	alert
 alerts	alerts
 Alex	Alex
@@ -3629,6 +3632,7 @@ cobalt	cobalt
 Cobb	Cobb
 cobra	cobra
 coca	coca
+Coca-Cola	Coca-Cola
 cocaine	cocaine
 cock	cock
 cockpit	cockpit
@@ -3644,6 +3648,8 @@ code	code
 codec	codec
 coded	coded
 codes	codes
+codespace	codespace
+codespaces	codespaces
 codex	codex
 codices	codices
 coding	coding
@@ -3682,6 +3688,8 @@ collaborate	collaborate
 collaboration	collaboration
 collaborations	collaborations
 collaborative	collaborative
+collaborator	collaborator
+collaborators	collaborators
 collage	collage
 collagen	collagen
 collapse	collapse
@@ -4932,6 +4940,7 @@ debris	debris
 debt	debt
 debtor	debtor
 debts	debts
+debuff	debuff
 debug	debug
 debugger	debugger
 debugging	debugging
@@ -7947,6 +7956,7 @@ gang	gang
 gangbang	gangbang
 gangs	gangs
 gangster	gangster
+gank	gank
 Gannett	Gannett
 # gao	gao
 gaol	gaol
@@ -9481,6 +9491,7 @@ implementations	implementations
 implemented	implemented
 implementing	implementing
 implements	implements
+implicate	implicate
 implication	implication
 implications	implications
 implicit	implicit
@@ -20875,6 +20886,8 @@ webcast	webcast
 webcasts	webcasts
 # webdesign	webdesign
 weber	weber
+webhook	webhook
+webhooks	webhooks
 # webhosting	webhosting
 # webinar	webinar
 weblog	weblog
